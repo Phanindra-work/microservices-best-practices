@@ -24,7 +24,7 @@ func NewManager(DBUrl string, DBname string) (Manager, error) {
 	if dbOpts.DatabaseURI == "" || dbOpts.DatabaseName == "" {
 		return nil, errMissingDBCredentials
 	}
-	db, err := sql.Open("mysql", "root:pass123@tcp(localhost:3306)/school")
+	db, err := sql.Open("mysql", DBUrl+"/"+DBname)
 	if err != nil {
 		fmt.Println(err)
 		return nil, fmt.Errorf("Unable to create MYSQL DB client, URL %s, opts : %v : %v", dbOpts.DatabaseURI, dbOpts, err)
