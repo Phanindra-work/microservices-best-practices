@@ -240,9 +240,9 @@ definitions:
   retrieve_for_notifications:
     description: Retrieve for Notifications
     properties:
-      student_id:
+      notification:
         type: string
-        x-go-name: student_id
+        x-go-name: notification
       teacher_id:
         type: string
         x-go-name: teacher_id

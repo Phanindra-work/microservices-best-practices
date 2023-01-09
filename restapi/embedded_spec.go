@@ -366,9 +366,9 @@ func init() {
       "description": "Retrieve for Notifications",
       "type": "object",
       "properties": {
-        "student_id": {
+        "notification": {
           "type": "string",
-          "x-go-name": "student_id",
+          "x-go-name": "notification",
           "x-order": 0
         },
         "teacher_id": {
@@ -798,9 +798,9 @@ func init() {
       "description": "Retrieve for Notifications",
       "type": "object",
       "properties": {
-        "student_id": {
+        "notification": {
           "type": "string",
-          "x-go-name": "student_id",
+          "x-go-name": "notification",
           "x-order": 0
         },
         "teacher_id": {

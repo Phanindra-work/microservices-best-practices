@@ -150,7 +150,7 @@ func (u *manager) Register(teacher_ID string, register apimodels.Register) error
 		defer stmt.Close()
 
 		// Insert a row into the table
-		result, err := stmt.Exec(v.StudentID, v.StudentEmail, 1, register.TeacherID)
+		result, err := stmt.Exec(v.StudentID, v.StudentEmail, "Active", register.TeacherID)
 		if err != nil {
 			fmt.Println(err)
 			return err
@@ -212,9 +212,55 @@ func (u *manager) Getcommonstudents(teacher_ID []string) (apimodels.CommonStuden
 	com.Students = students
 	return com, nil
 }
-func (u *manager) SuspendStudent(teacher_ID string, Pagestate apimodels.SuspendStudents) error {
+func (u *manager) SuspendStudent(teacher_ID string, student apimodels.SuspendStudents) error {
+	// Execute the UPDATE statement
+	result, err := u.client.Exec(`
+	 UPDATE Student SET Student_Status = 'Suspend' WHERE Student_ID = ?`, student.StudentID)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Get the number of rows affected by the UPDATE statement
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Print the number of rows affected
+	fmt.Println(rowsAffected, "rows affected.")
 	return nil
 }
 func (u *manager) Retrievefornotifications(teacher_ID apimodels.RetrieveForNotifications) (apimodels.Recipients, error) {
-	return apimodels.Recipients{}, nil
+	rows, err := u.client.Query(`
+        SELECT Student_ID,Student_Email_id,Student_Status FROM Student WHERE teacher_id =?`, teacher_ID.TeacherID)
+	if err != nil {
+		fmt.Println(err)
+		return apimodels.Recipients{}, err
+	}
+	defer rows.Close()
+	var students []*apimodels.Student
+	for rows.Next() {
+		// Create a new User struct
+		var student apimodels.Student
+
+		// Scan the columns into the fields of the User struct
+		if err := rows.Scan(&student.StudentID, &student.StudentEmail, &student.StudentStatus); err != nil {
+			fmt.Println(err)
+			return apimodels.Recipients{}, err
+		}
+
+		// Print the User struct
+		students = append(students, &student)
+
+	}
+	if err := rows.Err(); err != nil {
+		fmt.Println(err)
+		return apimodels.Recipients{}, err
+	}
+	com := apimodels.Recipients{}
+	com.Students = students
+	return com, nil
 }

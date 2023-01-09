@@ -15,8 +15,8 @@ import (
 // swagger:model retrieve_for_notifications
 type RetrieveForNotifications struct {
 
-	// student id
-	StudentID string `json:"student_id,omitempty"`
+	// notification
+	Notification string `json:"notification,omitempty"`
 
 	// teacher id
 	TeacherID string `json:"teacher_id,omitempty"`
