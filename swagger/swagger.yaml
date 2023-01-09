@@ -70,8 +70,10 @@ paths:
       description: Get Common Students
       parameters:
       - in: query
-        type: string
         name: teacher_id
+        type: array
+        items:
+             type: string
      
       responses:
         200:

@@ -21,8 +21,8 @@ type Student struct {
 	// student email
 	StudentEmail string `json:"student_email,omitempty"`
 
-	// status email
-	StatusEmail string `json:"status,omitempty"`
+	// student status
+	StudentStatus string `json:"status,omitempty"`
 }
 
 // Validate validates this student

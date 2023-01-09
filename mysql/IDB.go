@@ -29,7 +29,7 @@ type SearchOpts struct {
 // Manager ... stores/retrieves dialogue records.
 type Manager interface {
 	Register(teacher_ID string, register apimodels.Register) error
-	Getcommonstudents(teacher_ID string) (apimodels.CommonStudents, error)
+	Getcommonstudents(teacher_ID []string) (apimodels.CommonStudents, error)
 	SuspendStudent(teacher_ID string, Pagestate apimodels.SuspendStudents) error
 	Retrievefornotifications(teacher_ID apimodels.RetrieveForNotifications) (apimodels.Recipients, error)
 }

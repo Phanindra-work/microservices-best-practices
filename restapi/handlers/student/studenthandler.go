@@ -23,7 +23,7 @@ func Register(params student.CreateRegisterParams) middleware.Responder {
 func Getcommonstudents(params student.GetCommonStudentsParams) middleware.Responder {
 
 	resp := responder.New(params.HTTPRequest)
-	result, err := studentService.Getcommonstudents(*params.TeacherID)
+	result, err := studentService.Getcommonstudents(*&params.TeacherID)
 	if err != nil {
 		return resp.Status(500).Error(500, err.Error())
 	}

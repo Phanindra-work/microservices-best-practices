@@ -46,7 +46,10 @@ func init() {
         "operationId": "Get_Common_Students",
         "parameters": [
           {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "name": "teacher_id",
             "in": "query"
           }
@@ -382,7 +385,7 @@ func init() {
       "properties": {
         "status": {
           "type": "string",
-          "x-go-name": "status_email",
+          "x-go-name": "student_status",
           "x-order": 2
         },
         "student_email": {
@@ -458,7 +461,10 @@ func init() {
         "operationId": "Get_Common_Students",
         "parameters": [
           {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "name": "teacher_id",
             "in": "query"
           }
@@ -811,7 +817,7 @@ func init() {
       "properties": {
         "status": {
           "type": "string",
-          "x-go-name": "status_email",
+          "x-go-name": "student_status",
           "x-order": 2
         },
         "student_email": {

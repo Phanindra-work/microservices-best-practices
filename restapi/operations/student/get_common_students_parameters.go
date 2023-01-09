@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetCommonStudentsParams creates a new GetCommonStudentsParams object
@@ -33,7 +34,7 @@ type GetCommonStudentsParams struct {
 	/*
 	  In: query
 	*/
-	TeacherID *string
+	TeacherID []string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -58,20 +59,30 @@ func (o *GetCommonStudentsParams) BindRequest(r *http.Request, route *middleware
 	return nil
 }
 
-// bindTeacherID binds and validates parameter TeacherID from query.
+// bindTeacherID binds and validates array parameter TeacherID from query.
+//
+// Arrays are parsed according to CollectionFormat: "" (defaults to "csv" when empty).
 func (o *GetCommonStudentsParams) bindTeacherID(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	var raw string
+
+	var qvTeacherID string
 	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
+		qvTeacherID = rawData[len(rawData)-1]
 	}
 
-	// Required: false
-	// AllowEmptyValue: false
-	if raw == "" { // empty values pass all other validations
+	// CollectionFormat:
+	teacherIDIC := swag.SplitByFormat(qvTeacherID, "")
+	if len(teacherIDIC) == 0 {
 		return nil
 	}
 
-	o.TeacherID = &raw
+	var teacherIDIR []string
+	for _, teacherIDIV := range teacherIDIC {
+		teacherIDI := teacherIDIV
+
+		teacherIDIR = append(teacherIDIR, teacherIDI)
+	}
+
+	o.TeacherID = teacherIDIR
 
 	return nil
 }

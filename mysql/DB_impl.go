@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -28,7 +29,6 @@ func NewManager(DBUrl string, DBname string) (Manager, error) {
 		fmt.Println(err)
 		return nil, fmt.Errorf("Unable to create MYSQL DB client, URL %s, opts : %v : %v", dbOpts.DatabaseURI, dbOpts, err)
 	}
-	defer db.Close()
 
 	um := &manager{dbOpts: dbOpts, client: db}
 	err = um.initiateTables()
@@ -84,7 +84,7 @@ func (um *manager) initiateTables() error {
 }
 
 func (u *manager) createStudentTable() error {
-	query := `CREATE TABLE IF NOT EXISTS Student(student_unique_id int primary key auto_increment, student_id text, student_email_id text,student_status text,teacher_unique_id int,FOREIGN KEY (teacher_unique_id) REFERENCES Teacher(teacher_unique_id))`
+	query := `CREATE TABLE IF NOT EXISTS Student(id INT PRIMARY KEY AUTO_INCREMENT,student_id varchar(50), student_email_id text,student_status text,teacher_id varchar(50),FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id))`
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
 	res, err := u.client.ExecContext(ctx, query)
@@ -101,7 +101,7 @@ func (u *manager) createStudentTable() error {
 	return nil
 }
 func (u *manager) createTeacherTable() error {
-	query := `CREATE TABLE IF NOT EXISTS Teacher(teacher_unique_id int primary key auto_increment, teacher_id text, teacher_email_id text)`
+	query := `CREATE TABLE IF NOT EXISTS Teacher(teacher_id varchar(50) PRIMARY KEY, teacher_email_id text)`
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
 	res, err := u.client.ExecContext(ctx, query)
@@ -119,10 +119,98 @@ func (u *manager) createTeacherTable() error {
 }
 
 func (u *manager) Register(teacher_ID string, register apimodels.Register) error {
+	// Prepare the INSERT statement
+	stmt, err := u.client.Prepare("INSERT IGNORE INTO Teacher (teacher_id,teacher_email_id) VALUES (?, ?)")
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	defer stmt.Close()
+
+	// Insert a row into the table
+	result, err := stmt.Exec(register.TeacherID, register.TeacherID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Get the ID of the inserted row
+	id, err := result.LastInsertId()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	fmt.Println("Inserted row with ID", id)
+	for _, v := range register.Students {
+		stmt, err := u.client.Prepare("INSERT IGNORE INTO Student (student_id, student_email_id, student_status,teacher_id) VALUES (?, ?,?,?)")
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+		defer stmt.Close()
+
+		// Insert a row into the table
+		result, err := stmt.Exec(v.StudentID, v.StudentEmail, 1, register.TeacherID)
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+
+		// Get the ID of the inserted row
+		id, err := result.LastInsertId()
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+		fmt.Println("Inserted row with ID", id)
+
+	}
+
 	return nil
 }
-func (u *manager) Getcommonstudents(teacher_ID string) (apimodels.CommonStudents, error) {
-	return apimodels.CommonStudents{}, nil
+func (u *manager) Getcommonstudents(teacher_ID []string) (apimodels.CommonStudents, error) {
+
+	interfaceValues := make([]interface{}, len(teacher_ID))
+	for i, v := range teacher_ID {
+		interfaceValues[i] = v
+	}
+
+	// Create the placeholder string
+	placeholders := make([]string, len(teacher_ID))
+	for i := range placeholders {
+		placeholders[i] = "?"
+	}
+	placeholderString := "(" + strings.Join(placeholders, ",") + ")"
+
+	rows, err := u.client.Query(`
+        SELECT Student_ID,Student_Email_id,Student_Status FROM Student WHERE teacher_id IN`+placeholderString, interfaceValues...)
+	if err != nil {
+		fmt.Println(err)
+		return apimodels.CommonStudents{}, err
+	}
+	defer rows.Close()
+	var students []*apimodels.Student
+	for rows.Next() {
+		// Create a new User struct
+		var student apimodels.Student
+
+		// Scan the columns into the fields of the User struct
+		if err := rows.Scan(&student.StudentID, &student.StudentEmail, &student.StudentStatus); err != nil {
+			fmt.Println(err)
+			return apimodels.CommonStudents{}, err
+		}
+
+		// Print the User struct
+		students = append(students, &student)
+
+	}
+	if err := rows.Err(); err != nil {
+		fmt.Println(err)
+		return apimodels.CommonStudents{}, err
+	}
+	com := apimodels.CommonStudents{}
+	com.Students = students
+	return com, nil
 }
 func (u *manager) SuspendStudent(teacher_ID string, Pagestate apimodels.SuspendStudents) error {
 	return nil

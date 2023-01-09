@@ -12,7 +12,7 @@ func (ls *studentService) Register(teacher_ID string, register apimodels.Registe
 }
 
 // GetUserFrendsFeed
-func (ls *studentService) Getcommonstudents(teacher_ID string) (apimodels.CommonStudents, error) {
+func (ls *studentService) Getcommonstudents(teacher_ID []string) (apimodels.CommonStudents, error) {
 
 	return ls.db.Getcommonstudents(teacher_ID)
 
