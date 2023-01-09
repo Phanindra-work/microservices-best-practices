@@ -21,8 +21,8 @@ const (
 type envVars struct {
 	Environment Environment `envconfig:"environment" default:"local"`
 
-	MongoDatabaseURI  string `split_words:"true" default:"mysql://db_user:pass123@localhost:3306"`
-	MongoDatabaseName string `split_words:"true" default:"microservice"`
+	DatabaseURI  string `split_words:"true" default:"root:pass123@tcp(localhost:3306)"`
+	DatabaseName string `split_words:"true" default:"school"`
 
 	RedisURL            string `split_words:"true" default:"localhost:6379"`
 	ZipkinEndpoint      string `split_words:"true" default:"http://localhost:9411/api/v1/spans"`

@@ -46,7 +46,7 @@ func main() {
 		panic(err)
 	}
 
-	db, err := db.NewManager(config.Vars.MongoDatabaseURI, config.Vars.MongoDatabaseName)
+	db, err := db.NewManager(config.Vars.DatabaseURI, config.Vars.DatabaseName)
 
 	if err != nil {
 		l.Panicf("mongo connection error ", err)
