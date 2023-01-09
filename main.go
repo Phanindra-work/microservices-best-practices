@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/iAmPlus/microservice/mongo"
+	db "github.com/iAmPlus/microservice/mysql"
 	"github.com/iAmPlus/microservice/tracing"
 
 	"github.com/iAmPlus/microservice/config"
@@ -16,11 +16,12 @@ import (
 
 	apierrors "github.com/go-openapi/errors"
 	"github.com/iAmPlus/microservice/log"
-	feedhandler "github.com/iAmPlus/microservice/restapi/handlers/feed"
-	usershandlers "github.com/iAmPlus/microservice/restapi/handlers/users"
+
+	studenthandler "github.com/iAmPlus/microservice/restapi/handlers/student"
+	teacherhandler "github.com/iAmPlus/microservice/restapi/handlers/teacher"
 	"github.com/iAmPlus/microservice/restapi/operations"
-	feedservice "github.com/iAmPlus/microservice/services/feed"
-	userservice "github.com/iAmPlus/microservice/services/user"
+	studentservice "github.com/iAmPlus/microservice/services/students"
+	teacherservice "github.com/iAmPlus/microservice/services/teacher"
 )
 
 func main() {
@@ -45,15 +46,15 @@ func main() {
 		panic(err)
 	}
 
-	mongo, err := mongo.NewnewsManager(config.Vars.MongoDatabaseURI, config.Vars.MongoDatabaseName)
+	db, err := db.NewManager(config.Vars.MongoDatabaseURI, config.Vars.MongoDatabaseName)
 
 	if err != nil {
 		l.Panicf("mongo connection error ", err)
 	}
-	feedservice := feedservice.New(mongo)
-	feedhandler.Init(feedservice)
-	userservice := userservice.New(mongo)
-	usershandlers.Init(userservice)
+	studentservice := studentservice.New(db)
+	studenthandler.Init(studentservice)
+	teacherservice := teacherservice.New(db)
+	teacherhandler.Init(teacherservice)
 
 	apierrors.DefaultHTTPCode = http.StatusBadRequest
 	api := operations.NewMicroserviceAPI(swaggerSpec)

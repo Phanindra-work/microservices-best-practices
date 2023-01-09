@@ -21,7 +21,7 @@ const (
 type envVars struct {
 	Environment Environment `envconfig:"environment" default:"local"`
 
-	MongoDatabaseURI  string `split_words:"true" default:"mongodb://mongoadmin:secret@localhost:27017"`
+	MongoDatabaseURI  string `split_words:"true" default:"mysql://db_user:pass123@localhost:3306"`
 	MongoDatabaseName string `split_words:"true" default:"microservice"`
 
 	RedisURL            string `split_words:"true" default:"localhost:6379"`

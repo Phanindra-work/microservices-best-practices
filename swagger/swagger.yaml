@@ -31,47 +31,23 @@ paths:
         204:
           description: No content
   
-  /users:
-    get:
-      tags:
-        - users
-      summary: Get users
-      operationId: Get_Users
-      description: Get All Users
-     
-      responses:
-        200:
-          description: Get users
-          schema:
-            $ref: '#/definitions/users'
-        400:
-          description: |
-            Bad request <br>
+  
            
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        500:
-          description: Internal error 
-           
-  /user:
+  /register:
     post:
       tags:
-        - users
-      summary: create user
-      operationId:  Create_User
-      description:  create user
+        - student
+      summary: register student
+      operationId:  Create_Register
+      description:  create Register
       parameters:
         - in: body
           required: true
           name: payload
           schema:
-            $ref: '#/definitions/user'
+            $ref: '#/definitions/register'
       responses:
-        200:
+        204:
           description: No content   
         400:
           description: |
@@ -84,22 +60,54 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
         500:
-          description: Internal error        
-  /follow:
+          description: Internal error  
+  /commonstudents:
+    get:
+      tags:
+        - student
+      summary: Get Common Students
+      operationId: Get_Common_Students
+      description: Get Common Students
+      parameters:
+      - in: query
+        type: string
+        name: teacher_id
+     
+      responses:
+        200:
+          description: Get Common Students
+          schema:
+            $ref: '#/definitions/common_students'
+        400:
+          description: |
+            Bad request <br>
+           
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: Internal error       
+  /suspend:
     post:
       tags:
-        - users
-      summary: follow user
-      operationId:  Follow_User
-      description:  follow user
+        - teacher
+      summary: Suspend Student(s)
+      operationId:  suspend_student
+      description:  suspend_student
       parameters:
+        - in: query
+          type: string
+          name: teacher_id
         - in: body
           required: true
           name: payload
           schema:
-            $ref: '#/definitions/frend_request'
+            $ref: '#/definitions/suspend_students'
       responses:
-        200:
+        204:
          description: No content
         400:
           description: |
@@ -113,22 +121,24 @@ paths:
             $ref: "#/definitions/ErrorResponse"
         500:
           description: Internal error   
-  /un-follow:
+  /retrievefornotifications:
     post:
       tags:
-        - users
-      summary: un-follow user
-      operationId:  Un_Follow_User
-      description:  un-follow user
+        - teacher
+      summary: Retrieve For Notifications
+      operationId: retrieve_for_notifications
+      description: retrieve_for_notifications
       parameters:
         - in: body
           required: true
           name: payload
           schema:
-            $ref: '#/definitions/frend_request'
+            $ref: '#/definitions/retrieve_for_notifications'
       responses:
         200:
-          description: No content
+          description: Retrieve For Notifications
+          schema:
+            $ref: '#/definitions/recipients'
         400:
           description: |
             Bad request <br>
@@ -141,133 +151,9 @@ paths:
             $ref: "#/definitions/ErrorResponse"
         500:
           description: Internal error 
-  /feed-post:
-    post:
-      tags:
-        - feed
-      summary: post feed
-      operationId:  Create_Feed
-      description:  postfeed
-      parameters:
-        - in: body
-          required: true
-          name: payload
-          schema:
-            $ref: '#/definitions/feed_post'
-      responses:
-        200:
-          description: No content
-        400:
-          description: |
-            Bad request <br>
-            
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        500:
-          description: Internal error 
-  /user-feed:
-    post:
-      tags:
-        - feed
-      summary: user feed
-      operationId:  User_Feed
-      description:  user feed
-      parameters:
-        - in: query
-          type: string
-          name: user_email_id
-        - in: body
-          required: true
-          name: payload
-          schema:
-            $ref: '#/definitions/pagestate'
-      responses:
-        200:
-          description: Successfully user feed
-          schema:
-            $ref: '#/definitions/users_feed'
-        400:
-          description: |
-            Bad request <br>
-           
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        500:
-          description: Internal error 
-  /friends-feed:
-    post:
-      tags:
-        - feed
-      summary: friends feed
-      operationId:  Friends_Feed
-      description:  Friends Feed
-      parameters:
-        - in: query
-          type: string
-          name: user_email_id
-        - in: body
-          required: true
-          name: payload
-          schema:
-            $ref: '#/definitions/pagestate'
-      responses:
-        200:
-          description: Successfully user feed
-          schema:
-            $ref: '#/definitions/friends_feed'
-        400:
-          description: |
-            Bad request <br>
-            
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        500:
-          description: Internal error 
-  /relates:
-    post:
-        tags:
-          - feed
-        summary: related feed 
-        operationId: Get_Related_Feed
-        description: related feed response
-        parameters:
-            - in: query
-              type: string
-              name: user_email_id
-            - in: body
-              required: true
-              name: payload
-              schema:
-               $ref: '#/definitions/pagestate'
-        responses:
-            200:
-              description: Successfully got loyalty points
-              schema:
-                $ref: '#/definitions/related_feed_response'
-            400:
-              description: |
-                Bad request <br>
-               
-              schema:
-                $ref: '#/definitions/ErrorResponse'
-            401:
-              description: Unauthorized
-              schema:
-                $ref: "#/definitions/ErrorResponse"
-            500:
-              description: Internal error 
+  
+  
+ 
            
 
 
@@ -295,118 +181,78 @@ definitions:
           code:
             description: Error code for validation error - like error_code
             type: string  
-  user:
-    description: User structure
+  teacher:
+    description: Teacherr structure
     properties:
-      user_email_id:
+      teacher_id:
         type: string
-        x-go-name: user_email_id
-      reg_date:
+        x-go-name: teacher_id
+      teacher_email:
         type: string
-        x-go-name: reg_date 
-      friends:
-       items:
-         type: string
-       type: array
-      
+        x-go-name: teacher_email   
     type: object
     x-go-package: github.com/iAmPlus/microservice/models  
-  users:
-    description: list of Users structure
+  student:
+    description: Student structure
     properties:
-      User:
+      student_id:
+        type: string
+        x-go-name: student_id
+      student_email:
+        type: string
+        x-go-name: student_email 
+      status:
+        type: string
+        x-go-name: student_status   
+    type: object
+    x-go-package: github.com/iAmPlus/hotels/models
+  register:
+    description: Register Student
+    properties:
+      teacher_id:
+        type: string
+        x-go-name: teacher_id
+      students:
         items:
-          $ref: '#/definitions/user'
+          $ref: '#/definitions/student'
         type: array
     type: object
     x-go-package: github.com/iAmPlus/hotels/models
-  frend_request:
-    description: User structure
+  common_students:
+    description: Register Student
     properties:
-      source_user_email_id:
-        type: string
-        x-go-name: source_user_email_id
-      target_user_email_id:
-        type: string
-        x-go-name: target_user_email_id
-      
-    type: object
-    x-go-package: github.com/iAmPlus/microservice/models 
-  feed_post:
-    description: feed post
-    properties:
-      actor:
-        type: string
-        x-go-name: actor
-      verb:
-        type: string
-        x-go-name: verb
-      object:
-        type: string
-        x-go-name: object
-      target:
-        type: string
-        x-go-name: target
-      createdat:
-        type: string
-        format: date-time
-        x-go-name: createdat
-    type: object
-    x-go-package: github.com/iAmPlus/microservice/models 
-      
-  users_feed:
-    description: list of Users structure
-    properties:
-      my_feed:
+      students:
         items:
-          $ref: '#/definitions/feed_post'
-        type: array
-      page_state:
-          $ref: '#/definitions/pagination_data'
-    type: object
-    x-go-package: github.com/iAmPlus/hotels/models
-  friends_feed:
-    description: list of Users structure
-    properties:
-      friends_feed:
-        items:
-          $ref: '#/definitions/feed_post'
-        type: array
-      page_state:
-          $ref: '#/definitions/pagination_data'
-    type: object
-    x-go-package: github.com/iAmPlus/hotels/models
-  related_feed:
-    description: list of Users structure
-    properties:
-      actor:
-        type: string
-        x-go-name: actor
-      verb:
-        type: string
-        x-go-name: verb
-      object:
-        type: string
-        x-go-name: object
-      target:
-        type: string
-        x-go-name: target
-      related:
-        items:
-          $ref: '#/definitions/feed_post'
+          $ref: '#/definitions/student'
         type: array
     type: object
     x-go-package: github.com/iAmPlus/hotels/models
-  related_feed_response:
-    description: related_feed structure
+  suspend_students:
+    description: Suspend Students
     properties:
-        related_feed:
-          items:
-            $ref: '#/definitions/related_feed'
-          type: array
-
-        page_state:
-          $ref: '#/definitions/pagination_data'
+      student_id:
+        type: string
+        x-go-name: student_id
+    type: object
+    x-go-package: github.com/iAmPlus/hotels/models
+  retrieve_for_notifications:
+    description: Retrieve for Notifications
+    properties:
+      student_id:
+        type: string
+        x-go-name: student_id
+      teacher_id:
+        type: string
+        x-go-name: teacher_id
+    type: object
+    x-go-package: github.com/iAmPlus/hotels/models
+  recipients:
+    description: Recipients
+    properties:
+      students:
+        items:
+          $ref: '#/definitions/student'
+        type: array
     type: object
     x-go-package: github.com/iAmPlus/hotels/models
   pagestate:

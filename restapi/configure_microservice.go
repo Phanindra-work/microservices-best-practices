@@ -15,12 +15,12 @@ import (
 	"github.com/gofrs/uuid"
 	"github.com/justinas/alice"
 
-	feedhandler "github.com/iAmPlus/microservice/restapi/handlers/feed"
-	usershandlers "github.com/iAmPlus/microservice/restapi/handlers/users"
+	studenthandler "github.com/iAmPlus/microservice/restapi/handlers/student"
+	teacherhandlers "github.com/iAmPlus/microservice/restapi/handlers/teacher"
 	"github.com/iAmPlus/microservice/restapi/operations"
-	"github.com/iAmPlus/microservice/restapi/operations/feed"
 	"github.com/iAmPlus/microservice/restapi/operations/health"
-	"github.com/iAmPlus/microservice/restapi/operations/users"
+	"github.com/iAmPlus/microservice/restapi/operations/student"
+	"github.com/iAmPlus/microservice/restapi/operations/teacher"
 	"github.com/iAmPlus/microservice/tracing"
 )
 
@@ -48,17 +48,13 @@ func configureAPI(api *operations.MicroserviceAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	api.FeedCreateFeedHandler = feed.CreateFeedHandlerFunc(feedhandler.InserPost)
+	api.StudentCreateRegisterHandler = student.CreateRegisterHandlerFunc(studenthandler.Register)
 
-	api.UsersCreateUserHandler = users.CreateUserHandlerFunc(usershandlers.InserUser)
+	api.StudentGetCommonStudentsHandler = student.GetCommonStudentsHandlerFunc(studenthandler.Getcommonstudents)
 
-	api.UsersFollowUserHandler = users.FollowUserHandlerFunc(usershandlers.FollowUser)
+	api.TeacherSuspendStudentHandler = teacher.SuspendStudentHandlerFunc(teacherhandlers.SuspendStudent)
 
-	api.FeedFriendsFeedHandler = feed.FriendsFeedHandlerFunc(feedhandler.GetUserFrendsFeed)
-
-	api.FeedGetRelatedFeedHandler = feed.GetRelatedFeedHandlerFunc(feedhandler.GetRelatedFeed)
-
-	api.UsersGetUsersHandler = users.GetUsersHandlerFunc(usershandlers.GetAllUsers)
+	api.TeacherRetrieveForNotificationsHandler = teacher.RetrieveForNotificationsHandlerFunc(teacherhandlers.Retrievefornotifications)
 
 	if api.HealthLivenessHandler == nil {
 		api.HealthLivenessHandler = health.LivenessHandlerFunc(func(params health.LivenessParams) middleware.Responder {
@@ -70,10 +66,6 @@ func configureAPI(api *operations.MicroserviceAPI) http.Handler {
 			return middleware.NotImplemented("operation health.Readiness has not yet been implemented")
 		})
 	}
-
-	api.UsersUnFollowUserHandler = users.UnFollowUserHandlerFunc(usershandlers.UnFollowUser)
-
-	api.FeedUserFeedHandler = feed.UserFeedHandlerFunc(feedhandler.GetUserFeed)
 
 	api.PreServerShutdown = func() {}
 

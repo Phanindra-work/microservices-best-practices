@@ -36,114 +36,26 @@ func init() {
   },
   "basePath": "/",
   "paths": {
-    "/feed-post": {
-      "post": {
-        "description": "postfeed",
+    "/commonstudents": {
+      "get": {
+        "description": "Get Common Students",
         "tags": [
-          "feed"
+          "student"
         ],
-        "summary": "post feed",
-        "operationId": "Create_Feed",
-        "parameters": [
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/feed_post"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No content"
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/follow": {
-      "post": {
-        "description": "follow user",
-        "tags": [
-          "users"
-        ],
-        "summary": "follow user",
-        "operationId": "Follow_User",
-        "parameters": [
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/frend_request"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No content"
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/friends-feed": {
-      "post": {
-        "description": "Friends Feed",
-        "tags": [
-          "feed"
-        ],
-        "summary": "friends feed",
-        "operationId": "Friends_Feed",
+        "summary": "Get Common Students",
+        "operationId": "Get_Common_Students",
         "parameters": [
           {
             "type": "string",
-            "name": "user_email_id",
+            "name": "teacher_id",
             "in": "query"
-          },
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pagestate"
-            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully user feed",
+            "description": "Get Common Students",
             "schema": {
-              "$ref": "#/definitions/friends_feed"
+              "$ref": "#/definitions/common_students"
             }
           },
           "400": {
@@ -190,74 +102,26 @@ func init() {
         }
       }
     },
-    "/relates": {
+    "/register": {
       "post": {
-        "description": "related feed response",
+        "description": "create Register",
         "tags": [
-          "feed"
+          "student"
         ],
-        "summary": "related feed",
-        "operationId": "Get_Related_Feed",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "user_email_id",
-            "in": "query"
-          },
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pagestate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully got loyalty points",
-            "schema": {
-              "$ref": "#/definitions/related_feed_response"
-            }
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/un-follow": {
-      "post": {
-        "description": "un-follow user",
-        "tags": [
-          "users"
-        ],
-        "summary": "un-follow user",
-        "operationId": "Un_Follow_User",
+        "summary": "register student",
+        "operationId": "Create_Register",
         "parameters": [
           {
             "name": "payload",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/frend_request"
+              "$ref": "#/definitions/register"
             }
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "No content"
           },
           "400": {
@@ -278,27 +142,30 @@ func init() {
         }
       }
     },
-    "/user": {
+    "/retrievefornotifications": {
       "post": {
-        "description": "create user",
+        "description": "retrieve_for_notifications",
         "tags": [
-          "users"
+          "teacher"
         ],
-        "summary": "create user",
-        "operationId": "Create_User",
+        "summary": "Retrieve For Notifications",
+        "operationId": "retrieve_for_notifications",
         "parameters": [
           {
             "name": "payload",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/user"
+              "$ref": "#/definitions/retrieve_for_notifications"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "No content"
+            "description": "Retrieve For Notifications",
+            "schema": {
+              "$ref": "#/definitions/recipients"
+            }
           },
           "400": {
             "description": "Bad request \u003cbr\u003e\n",
@@ -318,18 +185,18 @@ func init() {
         }
       }
     },
-    "/user-feed": {
+    "/suspend": {
       "post": {
-        "description": "user feed",
+        "description": "suspend_student",
         "tags": [
-          "feed"
+          "teacher"
         ],
-        "summary": "user feed",
-        "operationId": "User_Feed",
+        "summary": "Suspend Student(s)",
+        "operationId": "suspend_student",
         "parameters": [
           {
             "type": "string",
-            "name": "user_email_id",
+            "name": "teacher_id",
             "in": "query"
           },
           {
@@ -337,49 +204,13 @@ func init() {
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pagestate"
+              "$ref": "#/definitions/suspend_students"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully user feed",
-            "schema": {
-              "$ref": "#/definitions/users_feed"
-            }
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/users": {
-      "get": {
-        "description": "Get All Users",
-        "tags": [
-          "users"
-        ],
-        "summary": "Get users",
-        "operationId": "Get_Users",
-        "responses": {
-          "200": {
-            "description": "Get users",
-            "schema": {
-              "$ref": "#/definitions/users"
-            }
+          "204": {
+            "description": "No content"
           },
           "400": {
             "description": "Bad request \u003cbr\u003e\n",
@@ -433,70 +264,16 @@ func init() {
         }
       }
     },
-    "feed_post": {
-      "description": "feed post",
+    "common_students": {
+      "description": "Register Student",
       "type": "object",
       "properties": {
-        "actor": {
-          "type": "string",
-          "x-go-name": "actor",
-          "x-order": 0
-        },
-        "createdat": {
-          "type": "string",
-          "format": "date-time",
-          "x-go-name": "createdat",
-          "x-order": 4
-        },
-        "object": {
-          "type": "string",
-          "x-go-name": "object",
-          "x-order": 2
-        },
-        "target": {
-          "type": "string",
-          "x-go-name": "target",
-          "x-order": 3
-        },
-        "verb": {
-          "type": "string",
-          "x-go-name": "verb",
-          "x-order": 1
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/microservice/models"
-    },
-    "frend_request": {
-      "description": "User structure",
-      "type": "object",
-      "properties": {
-        "source_user_email_id": {
-          "type": "string",
-          "x-go-name": "source_user_email_id",
-          "x-order": 0
-        },
-        "target_user_email_id": {
-          "type": "string",
-          "x-go-name": "target_user_email_id",
-          "x-order": 1
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/microservice/models"
-    },
-    "friends_feed": {
-      "description": "list of Users structure",
-      "type": "object",
-      "properties": {
-        "friends_feed": {
+        "students": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/feed_post"
+            "$ref": "#/definitions/student"
           },
           "x-order": 0
-        },
-        "page_state": {
-          "x-order": 1,
-          "$ref": "#/definitions/pagination_data"
         }
       },
       "x-go-package": "github.com/iAmPlus/hotels/models"
@@ -549,113 +326,106 @@ func init() {
       },
       "x-go-package": "github.com/iAmPlus/skill-news-go/common"
     },
-    "related_feed": {
-      "description": "list of Users structure",
+    "recipients": {
+      "description": "Recipients",
       "type": "object",
       "properties": {
-        "actor": {
-          "type": "string",
-          "x-go-name": "actor",
-          "x-order": 0
-        },
-        "object": {
-          "type": "string",
-          "x-go-name": "object",
-          "x-order": 2
-        },
-        "related": {
+        "students": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/feed_post"
-          },
-          "x-order": 4
-        },
-        "target": {
-          "type": "string",
-          "x-go-name": "target",
-          "x-order": 3
-        },
-        "verb": {
-          "type": "string",
-          "x-go-name": "verb",
-          "x-order": 1
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
-    },
-    "related_feed_response": {
-      "description": "related_feed structure",
-      "type": "object",
-      "properties": {
-        "page_state": {
-          "x-order": 1,
-          "$ref": "#/definitions/pagination_data"
-        },
-        "related_feed": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/related_feed"
+            "$ref": "#/definitions/student"
           },
           "x-order": 0
         }
       },
       "x-go-package": "github.com/iAmPlus/hotels/models"
     },
-    "user": {
-      "description": "User structure",
+    "register": {
+      "description": "Register Student",
       "type": "object",
       "properties": {
-        "friends": {
+        "students": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/student"
           },
-          "x-order": 2
-        },
-        "reg_date": {
-          "type": "string",
-          "x-go-name": "reg_date",
           "x-order": 1
         },
-        "user_email_id": {
+        "teacher_id": {
           "type": "string",
-          "x-go-name": "user_email_id",
+          "x-go-name": "teacher_id",
+          "x-order": 0
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "retrieve_for_notifications": {
+      "description": "Retrieve for Notifications",
+      "type": "object",
+      "properties": {
+        "student_id": {
+          "type": "string",
+          "x-go-name": "student_id",
+          "x-order": 0
+        },
+        "teacher_id": {
+          "type": "string",
+          "x-go-name": "teacher_id",
+          "x-order": 1
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "student": {
+      "description": "Student structure",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "x-go-name": "status_email",
+          "x-order": 2
+        },
+        "student_email": {
+          "type": "string",
+          "x-go-name": "student_email",
+          "x-order": 1
+        },
+        "student_id": {
+          "type": "string",
+          "x-go-name": "student_id",
+          "x-order": 0
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "suspend_students": {
+      "description": "Suspend Students",
+      "type": "object",
+      "properties": {
+        "student_id": {
+          "type": "string",
+          "x-go-name": "student_id",
+          "x-order": 0
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "teacher": {
+      "description": "Teacherr structure",
+      "type": "object",
+      "properties": {
+        "teacher_email": {
+          "type": "string",
+          "x-go-name": "teacher_email",
+          "x-order": 1
+        },
+        "teacher_id": {
+          "type": "string",
+          "x-go-name": "teacher_id",
           "x-order": 0
         }
       },
       "x-go-package": "github.com/iAmPlus/microservice/models"
-    },
-    "users": {
-      "description": "list of Users structure",
-      "type": "object",
-      "properties": {
-        "User": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/user"
-          },
-          "x-order": 0
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
-    },
-    "users_feed": {
-      "description": "list of Users structure",
-      "type": "object",
-      "properties": {
-        "my_feed": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/feed_post"
-          },
-          "x-order": 0
-        },
-        "page_state": {
-          "x-order": 1,
-          "$ref": "#/definitions/pagination_data"
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
     }
   }
 }`))
@@ -678,114 +448,26 @@ func init() {
   },
   "basePath": "/",
   "paths": {
-    "/feed-post": {
-      "post": {
-        "description": "postfeed",
+    "/commonstudents": {
+      "get": {
+        "description": "Get Common Students",
         "tags": [
-          "feed"
+          "student"
         ],
-        "summary": "post feed",
-        "operationId": "Create_Feed",
-        "parameters": [
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/feed_post"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No content"
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/follow": {
-      "post": {
-        "description": "follow user",
-        "tags": [
-          "users"
-        ],
-        "summary": "follow user",
-        "operationId": "Follow_User",
-        "parameters": [
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/frend_request"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No content"
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/friends-feed": {
-      "post": {
-        "description": "Friends Feed",
-        "tags": [
-          "feed"
-        ],
-        "summary": "friends feed",
-        "operationId": "Friends_Feed",
+        "summary": "Get Common Students",
+        "operationId": "Get_Common_Students",
         "parameters": [
           {
             "type": "string",
-            "name": "user_email_id",
+            "name": "teacher_id",
             "in": "query"
-          },
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pagestate"
-            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully user feed",
+            "description": "Get Common Students",
             "schema": {
-              "$ref": "#/definitions/friends_feed"
+              "$ref": "#/definitions/common_students"
             }
           },
           "400": {
@@ -832,74 +514,26 @@ func init() {
         }
       }
     },
-    "/relates": {
+    "/register": {
       "post": {
-        "description": "related feed response",
+        "description": "create Register",
         "tags": [
-          "feed"
+          "student"
         ],
-        "summary": "related feed",
-        "operationId": "Get_Related_Feed",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "user_email_id",
-            "in": "query"
-          },
-          {
-            "name": "payload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pagestate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully got loyalty points",
-            "schema": {
-              "$ref": "#/definitions/related_feed_response"
-            }
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/un-follow": {
-      "post": {
-        "description": "un-follow user",
-        "tags": [
-          "users"
-        ],
-        "summary": "un-follow user",
-        "operationId": "Un_Follow_User",
+        "summary": "register student",
+        "operationId": "Create_Register",
         "parameters": [
           {
             "name": "payload",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/frend_request"
+              "$ref": "#/definitions/register"
             }
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "No content"
           },
           "400": {
@@ -920,27 +554,30 @@ func init() {
         }
       }
     },
-    "/user": {
+    "/retrievefornotifications": {
       "post": {
-        "description": "create user",
+        "description": "retrieve_for_notifications",
         "tags": [
-          "users"
+          "teacher"
         ],
-        "summary": "create user",
-        "operationId": "Create_User",
+        "summary": "Retrieve For Notifications",
+        "operationId": "retrieve_for_notifications",
         "parameters": [
           {
             "name": "payload",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/user"
+              "$ref": "#/definitions/retrieve_for_notifications"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "No content"
+            "description": "Retrieve For Notifications",
+            "schema": {
+              "$ref": "#/definitions/recipients"
+            }
           },
           "400": {
             "description": "Bad request \u003cbr\u003e\n",
@@ -960,18 +597,18 @@ func init() {
         }
       }
     },
-    "/user-feed": {
+    "/suspend": {
       "post": {
-        "description": "user feed",
+        "description": "suspend_student",
         "tags": [
-          "feed"
+          "teacher"
         ],
-        "summary": "user feed",
-        "operationId": "User_Feed",
+        "summary": "Suspend Student(s)",
+        "operationId": "suspend_student",
         "parameters": [
           {
             "type": "string",
-            "name": "user_email_id",
+            "name": "teacher_id",
             "in": "query"
           },
           {
@@ -979,49 +616,13 @@ func init() {
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pagestate"
+              "$ref": "#/definitions/suspend_students"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully user feed",
-            "schema": {
-              "$ref": "#/definitions/users_feed"
-            }
-          },
-          "400": {
-            "description": "Bad request \u003cbr\u003e\n",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
-    "/users": {
-      "get": {
-        "description": "Get All Users",
-        "tags": [
-          "users"
-        ],
-        "summary": "Get users",
-        "operationId": "Get_Users",
-        "responses": {
-          "200": {
-            "description": "Get users",
-            "schema": {
-              "$ref": "#/definitions/users"
-            }
+          "204": {
+            "description": "No content"
           },
           "400": {
             "description": "Bad request \u003cbr\u003e\n",
@@ -1092,70 +693,16 @@ func init() {
       },
       "x-order": 2
     },
-    "feed_post": {
-      "description": "feed post",
+    "common_students": {
+      "description": "Register Student",
       "type": "object",
       "properties": {
-        "actor": {
-          "type": "string",
-          "x-go-name": "actor",
-          "x-order": 0
-        },
-        "createdat": {
-          "type": "string",
-          "format": "date-time",
-          "x-go-name": "createdat",
-          "x-order": 4
-        },
-        "object": {
-          "type": "string",
-          "x-go-name": "object",
-          "x-order": 2
-        },
-        "target": {
-          "type": "string",
-          "x-go-name": "target",
-          "x-order": 3
-        },
-        "verb": {
-          "type": "string",
-          "x-go-name": "verb",
-          "x-order": 1
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/microservice/models"
-    },
-    "frend_request": {
-      "description": "User structure",
-      "type": "object",
-      "properties": {
-        "source_user_email_id": {
-          "type": "string",
-          "x-go-name": "source_user_email_id",
-          "x-order": 0
-        },
-        "target_user_email_id": {
-          "type": "string",
-          "x-go-name": "target_user_email_id",
-          "x-order": 1
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/microservice/models"
-    },
-    "friends_feed": {
-      "description": "list of Users structure",
-      "type": "object",
-      "properties": {
-        "friends_feed": {
+        "students": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/feed_post"
+            "$ref": "#/definitions/student"
           },
           "x-order": 0
-        },
-        "page_state": {
-          "x-order": 1,
-          "$ref": "#/definitions/pagination_data"
         }
       },
       "x-go-package": "github.com/iAmPlus/hotels/models"
@@ -1208,113 +755,106 @@ func init() {
       },
       "x-go-package": "github.com/iAmPlus/skill-news-go/common"
     },
-    "related_feed": {
-      "description": "list of Users structure",
+    "recipients": {
+      "description": "Recipients",
       "type": "object",
       "properties": {
-        "actor": {
-          "type": "string",
-          "x-go-name": "actor",
-          "x-order": 0
-        },
-        "object": {
-          "type": "string",
-          "x-go-name": "object",
-          "x-order": 2
-        },
-        "related": {
+        "students": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/feed_post"
-          },
-          "x-order": 4
-        },
-        "target": {
-          "type": "string",
-          "x-go-name": "target",
-          "x-order": 3
-        },
-        "verb": {
-          "type": "string",
-          "x-go-name": "verb",
-          "x-order": 1
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
-    },
-    "related_feed_response": {
-      "description": "related_feed structure",
-      "type": "object",
-      "properties": {
-        "page_state": {
-          "x-order": 1,
-          "$ref": "#/definitions/pagination_data"
-        },
-        "related_feed": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/related_feed"
+            "$ref": "#/definitions/student"
           },
           "x-order": 0
         }
       },
       "x-go-package": "github.com/iAmPlus/hotels/models"
     },
-    "user": {
-      "description": "User structure",
+    "register": {
+      "description": "Register Student",
       "type": "object",
       "properties": {
-        "friends": {
+        "students": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/student"
           },
-          "x-order": 2
-        },
-        "reg_date": {
-          "type": "string",
-          "x-go-name": "reg_date",
           "x-order": 1
         },
-        "user_email_id": {
+        "teacher_id": {
           "type": "string",
-          "x-go-name": "user_email_id",
+          "x-go-name": "teacher_id",
+          "x-order": 0
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "retrieve_for_notifications": {
+      "description": "Retrieve for Notifications",
+      "type": "object",
+      "properties": {
+        "student_id": {
+          "type": "string",
+          "x-go-name": "student_id",
+          "x-order": 0
+        },
+        "teacher_id": {
+          "type": "string",
+          "x-go-name": "teacher_id",
+          "x-order": 1
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "student": {
+      "description": "Student structure",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "x-go-name": "status_email",
+          "x-order": 2
+        },
+        "student_email": {
+          "type": "string",
+          "x-go-name": "student_email",
+          "x-order": 1
+        },
+        "student_id": {
+          "type": "string",
+          "x-go-name": "student_id",
+          "x-order": 0
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "suspend_students": {
+      "description": "Suspend Students",
+      "type": "object",
+      "properties": {
+        "student_id": {
+          "type": "string",
+          "x-go-name": "student_id",
+          "x-order": 0
+        }
+      },
+      "x-go-package": "github.com/iAmPlus/hotels/models"
+    },
+    "teacher": {
+      "description": "Teacherr structure",
+      "type": "object",
+      "properties": {
+        "teacher_email": {
+          "type": "string",
+          "x-go-name": "teacher_email",
+          "x-order": 1
+        },
+        "teacher_id": {
+          "type": "string",
+          "x-go-name": "teacher_id",
           "x-order": 0
         }
       },
       "x-go-package": "github.com/iAmPlus/microservice/models"
-    },
-    "users": {
-      "description": "list of Users structure",
-      "type": "object",
-      "properties": {
-        "User": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/user"
-          },
-          "x-order": 0
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
-    },
-    "users_feed": {
-      "description": "list of Users structure",
-      "type": "object",
-      "properties": {
-        "my_feed": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/feed_post"
-          },
-          "x-order": 0
-        },
-        "page_state": {
-          "x-order": 1,
-          "$ref": "#/definitions/pagination_data"
-        }
-      },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
     }
   }
 }`))

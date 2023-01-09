@@ -19,9 +19,9 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/iAmPlus/microservice/restapi/operations/feed"
 	"github.com/iAmPlus/microservice/restapi/operations/health"
-	"github.com/iAmPlus/microservice/restapi/operations/users"
+	"github.com/iAmPlus/microservice/restapi/operations/student"
+	"github.com/iAmPlus/microservice/restapi/operations/teacher"
 )
 
 // NewMicroserviceAPI creates a new Microservice instance
@@ -46,23 +46,11 @@ func NewMicroserviceAPI(spec *loads.Document) *MicroserviceAPI {
 
 		JSONProducer: runtime.JSONProducer(),
 
-		FeedCreateFeedHandler: feed.CreateFeedHandlerFunc(func(params feed.CreateFeedParams) middleware.Responder {
-			return middleware.NotImplemented("operation feed.CreateFeed has not yet been implemented")
+		StudentCreateRegisterHandler: student.CreateRegisterHandlerFunc(func(params student.CreateRegisterParams) middleware.Responder {
+			return middleware.NotImplemented("operation student.CreateRegister has not yet been implemented")
 		}),
-		UsersCreateUserHandler: users.CreateUserHandlerFunc(func(params users.CreateUserParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.CreateUser has not yet been implemented")
-		}),
-		UsersFollowUserHandler: users.FollowUserHandlerFunc(func(params users.FollowUserParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.FollowUser has not yet been implemented")
-		}),
-		FeedFriendsFeedHandler: feed.FriendsFeedHandlerFunc(func(params feed.FriendsFeedParams) middleware.Responder {
-			return middleware.NotImplemented("operation feed.FriendsFeed has not yet been implemented")
-		}),
-		FeedGetRelatedFeedHandler: feed.GetRelatedFeedHandlerFunc(func(params feed.GetRelatedFeedParams) middleware.Responder {
-			return middleware.NotImplemented("operation feed.GetRelatedFeed has not yet been implemented")
-		}),
-		UsersGetUsersHandler: users.GetUsersHandlerFunc(func(params users.GetUsersParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.GetUsers has not yet been implemented")
+		StudentGetCommonStudentsHandler: student.GetCommonStudentsHandlerFunc(func(params student.GetCommonStudentsParams) middleware.Responder {
+			return middleware.NotImplemented("operation student.GetCommonStudents has not yet been implemented")
 		}),
 		HealthLivenessHandler: health.LivenessHandlerFunc(func(params health.LivenessParams) middleware.Responder {
 			return middleware.NotImplemented("operation health.Liveness has not yet been implemented")
@@ -70,11 +58,11 @@ func NewMicroserviceAPI(spec *loads.Document) *MicroserviceAPI {
 		HealthReadinessHandler: health.ReadinessHandlerFunc(func(params health.ReadinessParams) middleware.Responder {
 			return middleware.NotImplemented("operation health.Readiness has not yet been implemented")
 		}),
-		UsersUnFollowUserHandler: users.UnFollowUserHandlerFunc(func(params users.UnFollowUserParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.UnFollowUser has not yet been implemented")
+		TeacherRetrieveForNotificationsHandler: teacher.RetrieveForNotificationsHandlerFunc(func(params teacher.RetrieveForNotificationsParams) middleware.Responder {
+			return middleware.NotImplemented("operation teacher.RetrieveForNotifications has not yet been implemented")
 		}),
-		FeedUserFeedHandler: feed.UserFeedHandlerFunc(func(params feed.UserFeedParams) middleware.Responder {
-			return middleware.NotImplemented("operation feed.UserFeed has not yet been implemented")
+		TeacherSuspendStudentHandler: teacher.SuspendStudentHandlerFunc(func(params teacher.SuspendStudentParams) middleware.Responder {
+			return middleware.NotImplemented("operation teacher.SuspendStudent has not yet been implemented")
 		}),
 	}
 }
@@ -110,26 +98,18 @@ type MicroserviceAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
-	// FeedCreateFeedHandler sets the operation handler for the create feed operation
-	FeedCreateFeedHandler feed.CreateFeedHandler
-	// UsersCreateUserHandler sets the operation handler for the create user operation
-	UsersCreateUserHandler users.CreateUserHandler
-	// UsersFollowUserHandler sets the operation handler for the follow user operation
-	UsersFollowUserHandler users.FollowUserHandler
-	// FeedFriendsFeedHandler sets the operation handler for the friends feed operation
-	FeedFriendsFeedHandler feed.FriendsFeedHandler
-	// FeedGetRelatedFeedHandler sets the operation handler for the get related feed operation
-	FeedGetRelatedFeedHandler feed.GetRelatedFeedHandler
-	// UsersGetUsersHandler sets the operation handler for the get users operation
-	UsersGetUsersHandler users.GetUsersHandler
+	// StudentCreateRegisterHandler sets the operation handler for the create register operation
+	StudentCreateRegisterHandler student.CreateRegisterHandler
+	// StudentGetCommonStudentsHandler sets the operation handler for the get common students operation
+	StudentGetCommonStudentsHandler student.GetCommonStudentsHandler
 	// HealthLivenessHandler sets the operation handler for the liveness operation
 	HealthLivenessHandler health.LivenessHandler
 	// HealthReadinessHandler sets the operation handler for the readiness operation
 	HealthReadinessHandler health.ReadinessHandler
-	// UsersUnFollowUserHandler sets the operation handler for the un follow user operation
-	UsersUnFollowUserHandler users.UnFollowUserHandler
-	// FeedUserFeedHandler sets the operation handler for the user feed operation
-	FeedUserFeedHandler feed.UserFeedHandler
+	// TeacherRetrieveForNotificationsHandler sets the operation handler for the retrieve for notifications operation
+	TeacherRetrieveForNotificationsHandler teacher.RetrieveForNotificationsHandler
+	// TeacherSuspendStudentHandler sets the operation handler for the suspend student operation
+	TeacherSuspendStudentHandler teacher.SuspendStudentHandler
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
 	ServeError func(http.ResponseWriter, *http.Request, error)
@@ -206,23 +186,11 @@ func (o *MicroserviceAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
-	if o.FeedCreateFeedHandler == nil {
-		unregistered = append(unregistered, "feed.CreateFeedHandler")
+	if o.StudentCreateRegisterHandler == nil {
+		unregistered = append(unregistered, "student.CreateRegisterHandler")
 	}
-	if o.UsersCreateUserHandler == nil {
-		unregistered = append(unregistered, "users.CreateUserHandler")
-	}
-	if o.UsersFollowUserHandler == nil {
-		unregistered = append(unregistered, "users.FollowUserHandler")
-	}
-	if o.FeedFriendsFeedHandler == nil {
-		unregistered = append(unregistered, "feed.FriendsFeedHandler")
-	}
-	if o.FeedGetRelatedFeedHandler == nil {
-		unregistered = append(unregistered, "feed.GetRelatedFeedHandler")
-	}
-	if o.UsersGetUsersHandler == nil {
-		unregistered = append(unregistered, "users.GetUsersHandler")
+	if o.StudentGetCommonStudentsHandler == nil {
+		unregistered = append(unregistered, "student.GetCommonStudentsHandler")
 	}
 	if o.HealthLivenessHandler == nil {
 		unregistered = append(unregistered, "health.LivenessHandler")
@@ -230,11 +198,11 @@ func (o *MicroserviceAPI) Validate() error {
 	if o.HealthReadinessHandler == nil {
 		unregistered = append(unregistered, "health.ReadinessHandler")
 	}
-	if o.UsersUnFollowUserHandler == nil {
-		unregistered = append(unregistered, "users.UnFollowUserHandler")
+	if o.TeacherRetrieveForNotificationsHandler == nil {
+		unregistered = append(unregistered, "teacher.RetrieveForNotificationsHandler")
 	}
-	if o.FeedUserFeedHandler == nil {
-		unregistered = append(unregistered, "feed.UserFeedHandler")
+	if o.TeacherSuspendStudentHandler == nil {
+		unregistered = append(unregistered, "teacher.SuspendStudentHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -327,27 +295,11 @@ func (o *MicroserviceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/feed-post"] = feed.NewCreateFeed(o.context, o.FeedCreateFeedHandler)
-	if o.handlers["POST"] == nil {
-		o.handlers["POST"] = make(map[string]http.Handler)
-	}
-	o.handlers["POST"]["/user"] = users.NewCreateUser(o.context, o.UsersCreateUserHandler)
-	if o.handlers["POST"] == nil {
-		o.handlers["POST"] = make(map[string]http.Handler)
-	}
-	o.handlers["POST"]["/follow"] = users.NewFollowUser(o.context, o.UsersFollowUserHandler)
-	if o.handlers["POST"] == nil {
-		o.handlers["POST"] = make(map[string]http.Handler)
-	}
-	o.handlers["POST"]["/friends-feed"] = feed.NewFriendsFeed(o.context, o.FeedFriendsFeedHandler)
-	if o.handlers["POST"] == nil {
-		o.handlers["POST"] = make(map[string]http.Handler)
-	}
-	o.handlers["POST"]["/relates"] = feed.NewGetRelatedFeed(o.context, o.FeedGetRelatedFeedHandler)
+	o.handlers["POST"]["/register"] = student.NewCreateRegister(o.context, o.StudentCreateRegisterHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/users"] = users.NewGetUsers(o.context, o.UsersGetUsersHandler)
+	o.handlers["GET"]["/commonstudents"] = student.NewGetCommonStudents(o.context, o.StudentGetCommonStudentsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -359,11 +311,11 @@ func (o *MicroserviceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/un-follow"] = users.NewUnFollowUser(o.context, o.UsersUnFollowUserHandler)
+	o.handlers["POST"]["/retrievefornotifications"] = teacher.NewRetrieveForNotifications(o.context, o.TeacherRetrieveForNotificationsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/user-feed"] = feed.NewUserFeed(o.context, o.FeedUserFeedHandler)
+	o.handlers["POST"]["/suspend"] = teacher.NewSuspendStudent(o.context, o.TeacherSuspendStudentHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP
