@@ -12,6 +12,8 @@ This program helps in describing the go language microservice based  application
 - logging enabled
 - Multi-stage Docker file 
 - Configurations load upon Environment 
+- Unittest coverage 
+- Docker Compose
 
 
 ## Installation
