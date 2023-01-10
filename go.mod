@@ -3,8 +3,10 @@ module github.com/iAmPlus/microservice
 go 1.14
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/Shopify/sarama v1.27.2 // indirect
 	github.com/apache/thrift v0.13.0 // indirect
+	github.com/gin-gonic/gin v1.8.2
 	github.com/go-delve/delve v1.5.1 // indirect
 	github.com/go-openapi/errors v0.19.6
 	github.com/go-openapi/loads v0.19.5
@@ -19,7 +21,7 @@ require (
 	github.com/gomodule/redigo v1.8.3
 	github.com/hashicorp/go-cleanhttp v0.5.1
 	github.com/jessevdk/go-flags v1.4.0
-	github.com/json-iterator/go v1.1.10
+	github.com/json-iterator/go v1.1.12
 	github.com/justinas/alice v1.2.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/mattn/go-colorable v0.1.8 // indirect
@@ -42,14 +44,13 @@ require (
 	github.com/sirupsen/logrus v1.7.0
 	github.com/spf13/cobra v1.1.1 // indirect
 	github.com/spf13/viper v1.7.0
+	github.com/stretchr/testify v1.8.1
 	go.mongodb.org/mongo-driver v1.3.5
 	go.starlark.net v0.0.0-20201210151846-e81fc95f7bd5 // indirect
 	go.uber.org/zap v1.10.0
 	golang.org/x/arch v0.0.0-20210105144330-cfa462d59626 // indirect
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b // indirect
-	golang.org/x/net v0.0.0-20200904194848-62affa334b73
-	golang.org/x/sys v0.0.0-20210113131315-ba0562f347e0 // indirect
-	golang.org/x/tools v0.0.0-20200717024301-6ddee64345a6 // indirect
+	golang.org/x/net v0.4.0
 	gopkg.in/go-playground/assert.v1 v1.2.1
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.5 // indirect

@@ -136,6 +136,6 @@ func GetCorrelationIDMiddleware(h http.Handler) http.Handler {
 func newCorrelationID() string {
 	return uuid.NewV5(
 		uuid.NamespaceURL,
-		fmt.Sprintf("%s:%d", "hotels.iamplus.services", time.Now().UnixNano()),
+		fmt.Sprintf("%s:%d", "microservice-services", time.Now().UnixNano()),
 	).String()
 }
