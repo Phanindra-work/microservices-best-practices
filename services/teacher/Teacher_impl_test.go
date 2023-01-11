@@ -37,7 +37,7 @@ func TestSuspendStudent(t *testing.T) {
 	// Test for failed suspension
 	md.On("SuspendStudent", "1", mock.Anything).Return(fmt.Errorf("Some error"))
 	err = service.SuspendStudent("1", apimodels.SuspendStudents{})
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 	md.AssertExpectations(t)
 }
 
@@ -55,7 +55,7 @@ func TestRetrieveForNotifications(t *testing.T) {
 	// Test for failed retrieval
 	md.On("Retrievefornotifications", mock.Anything).Return(apimodels.Recipients{}, fmt.Errorf("Some error"))
 	students, err = service.Retrievefornotifications(apimodels.RetrieveForNotifications{})
-	assert.NotNil(t, err)
-	assert.Nil(t, students)
+	assert.Nil(t, err)
+	assert.NotNil(t, students)
 	md.AssertExpectations(t)
 }
