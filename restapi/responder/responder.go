@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"github.com/go-openapi/runtime"
-	"github.com/iAmPlus/microservice/log"
+	"github.com/microservice/log"
 )
 
 // Responder implements middleware.Responder and allows us to
@@ -34,9 +34,9 @@ func (resp *Responder) WriteResponse(rw http.ResponseWriter, producer runtime.Pr
 }
 
 // write writes response:
-//   1) Set header fields.
-//   2) Write header with status.
-//   3) Write body.
+//  1. Set header fields.
+//  2. Write header with status.
+//  3. Write body.
 func (resp *Responder) write(rw http.ResponseWriter, producer runtime.Producer) {
 	// If response body is nil, remove Content-Type header field only.
 	if resp.body == nil {

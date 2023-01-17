@@ -3,7 +3,7 @@ package db
 import (
 	"time"
 
-	"github.com/iAmPlus/microservice/models/apimodels"
+	"github.com/microservice/models/apimodels"
 )
 
 // CreateOptsFromConfig creates opts from config

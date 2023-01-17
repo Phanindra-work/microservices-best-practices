@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/iAmPlus/microservice/models/apimodels"
+	"github.com/microservice/models/apimodels"
 )
 
 // NewSuspendStudentParams creates a new SuspendStudentParams object

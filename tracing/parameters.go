@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/iAmPlus/microservice/config"
+	"github.com/microservice/config"
 	"github.com/opentracing/opentracing-go"
 )
 

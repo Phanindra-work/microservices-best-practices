@@ -10,9 +10,9 @@ import (
 	"strings"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/iAmPlus/microservice/config"
-	"github.com/iAmPlus/microservice/log"
 	"github.com/justinas/alice"
+	"github.com/microservice/config"
+	"github.com/microservice/log"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	zipkin "github.com/openzipkin-contrib/zipkin-go-opentracing"

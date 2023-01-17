@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/iAmPlus/microservice/tracing"
+	"github.com/microservice/tracing"
 )
 
 var defaultHTTPTransport = &http.Transport{

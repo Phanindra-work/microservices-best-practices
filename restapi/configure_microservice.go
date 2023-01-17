@@ -15,13 +15,13 @@ import (
 	"github.com/gofrs/uuid"
 	"github.com/justinas/alice"
 
-	studenthandler "github.com/iAmPlus/microservice/restapi/handlers/student"
-	teacherhandlers "github.com/iAmPlus/microservice/restapi/handlers/teacher"
-	"github.com/iAmPlus/microservice/restapi/operations"
-	"github.com/iAmPlus/microservice/restapi/operations/health"
-	"github.com/iAmPlus/microservice/restapi/operations/student"
-	"github.com/iAmPlus/microservice/restapi/operations/teacher"
-	"github.com/iAmPlus/microservice/tracing"
+	studenthandler "github.com/microservice/restapi/handlers/student"
+	teacherhandlers "github.com/microservice/restapi/handlers/teacher"
+	"github.com/microservice/restapi/operations"
+	"github.com/microservice/restapi/operations/health"
+	"github.com/microservice/restapi/operations/student"
+	"github.com/microservice/restapi/operations/teacher"
+	"github.com/microservice/tracing"
 )
 
 //go:generate swagger generate server --target ../../microservice_best_practice --name Microservice --spec ../../../../../../../../var/folders/fw/kv072vln3ps_hcq809qryz7r0000gp/T/swagger.yaml462203815 --model-package models/apimodels --principal models.Principal

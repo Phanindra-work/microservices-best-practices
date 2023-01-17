@@ -1,7 +1,7 @@
 package teacherhandlers
 
 import (
-	"github.com/iAmPlus/microservice/models/apimodels"
+	"github.com/microservice/models/apimodels"
 )
 
 // PaymentService Process Payment.

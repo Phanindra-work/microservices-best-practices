@@ -19,9 +19,9 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/iAmPlus/microservice/restapi/operations/health"
-	"github.com/iAmPlus/microservice/restapi/operations/student"
-	"github.com/iAmPlus/microservice/restapi/operations/teacher"
+	"github.com/microservice/restapi/operations/health"
+	"github.com/microservice/restapi/operations/student"
+	"github.com/microservice/restapi/operations/teacher"
 )
 
 // NewMicroserviceAPI creates a new Microservice instance

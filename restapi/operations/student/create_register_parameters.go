@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"github.com/iAmPlus/microservice/models/apimodels"
+	"github.com/microservice/models/apimodels"
 )
 
 // NewCreateRegisterParams creates a new CreateRegisterParams object

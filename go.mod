@@ -1,4 +1,4 @@
-module github.com/iAmPlus/microservice
+module github.com/microservice
 
 go 1.14
 

@@ -5,23 +5,23 @@ import (
 	"net/http"
 	"time"
 
-	db "github.com/iAmPlus/microservice/mysql"
-	"github.com/iAmPlus/microservice/tracing"
+	db "github.com/microservice/mysql"
+	"github.com/microservice/tracing"
 
-	"github.com/iAmPlus/microservice/config"
-	"github.com/iAmPlus/microservice/retryablehttp"
+	"github.com/microservice/config"
+	"github.com/microservice/retryablehttp"
 
 	"github.com/go-openapi/loads"
-	"github.com/iAmPlus/microservice/restapi"
+	"github.com/microservice/restapi"
 
 	apierrors "github.com/go-openapi/errors"
-	"github.com/iAmPlus/microservice/log"
+	"github.com/microservice/log"
 
-	studenthandler "github.com/iAmPlus/microservice/restapi/handlers/student"
-	teacherhandler "github.com/iAmPlus/microservice/restapi/handlers/teacher"
-	"github.com/iAmPlus/microservice/restapi/operations"
-	studentservice "github.com/iAmPlus/microservice/services/students"
-	teacherservice "github.com/iAmPlus/microservice/services/teacher"
+	studenthandler "github.com/microservice/restapi/handlers/student"
+	teacherhandler "github.com/microservice/restapi/handlers/teacher"
+	"github.com/microservice/restapi/operations"
+	studentservice "github.com/microservice/services/students"
+	teacherservice "github.com/microservice/services/teacher"
 )
 
 func main() {

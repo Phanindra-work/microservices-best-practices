@@ -1,6 +1,6 @@
 package studentService
 
-import "github.com/iAmPlus/microservice/models/apimodels"
+import "github.com/microservice/models/apimodels"
 
 type Database interface {
 	Register(teacher_ID string, register apimodels.Register) error

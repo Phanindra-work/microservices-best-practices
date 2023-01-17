@@ -10,7 +10,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/iAmPlus/microservice/models/apimodels"
+	"github.com/microservice/models/apimodels"
 )
 
 var (

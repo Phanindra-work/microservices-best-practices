@@ -2,8 +2,8 @@ package teacherhandlers
 
 import (
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/iAmPlus/microservice/restapi/operations/teacher"
-	"github.com/iAmPlus/microservice/restapi/responder"
+	"github.com/microservice/restapi/operations/teacher"
+	"github.com/microservice/restapi/responder"
 )
 
 func SuspendStudent(params teacher.SuspendStudentParams) middleware.Responder {

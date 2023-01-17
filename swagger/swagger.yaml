@@ -193,7 +193,7 @@ definitions:
         type: string
         x-go-name: teacher_email   
     type: object
-    x-go-package: github.com/iAmPlus/microservice/models  
+    x-go-package: github.com/microservice/models  
   student:
     description: Student structure
     properties:
@@ -207,7 +207,7 @@ definitions:
         type: string
         x-go-name: student_status   
     type: object
-    x-go-package: github.com/iAmPlus/hotels/models
+    x-go-package: github.com/microservice/models
   register:
     description: Register Student
     properties:
@@ -219,7 +219,7 @@ definitions:
           $ref: '#/definitions/student'
         type: array
     type: object
-    x-go-package: github.com/iAmPlus/hotels/models
+    x-go-package: github.com/microservice/models
   common_students:
     description: Register Student
     properties:
@@ -228,7 +228,7 @@ definitions:
           $ref: '#/definitions/student'
         type: array
     type: object
-    x-go-package: github.com/iAmPlus/hotels/models
+    x-go-package: github.com/microservice/models
   suspend_students:
     description: Suspend Students
     properties:
@@ -236,7 +236,7 @@ definitions:
         type: string
         x-go-name: student_id
     type: object
-    x-go-package: github.com/iAmPlus/hotels/models
+    x-go-package: github.com/microservice/models
   retrieve_for_notifications:
     description: Retrieve for Notifications
     properties:
@@ -247,7 +247,7 @@ definitions:
         type: string
         x-go-name: teacher_id
     type: object
-    x-go-package: github.com/iAmPlus/hotels/models
+    x-go-package: github.com/microservice/models
   recipients:
     description: Recipients
     properties:
@@ -256,7 +256,7 @@ definitions:
           $ref: '#/definitions/student'
         type: array
     type: object
-    x-go-package: github.com/iAmPlus/hotels/models
+    x-go-package: github.com/microservice/models
   pagestate:
     properties:
       pageid:
@@ -288,4 +288,4 @@ definitions:
         type: integer
         x-go-name: TotalPage
     type: object
-    x-go-package: github.com/iAmPlus/skill-news-go/common
+    x-go-package: github.com/microservice/models

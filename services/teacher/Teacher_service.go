@@ -1,6 +1,6 @@
 package teacherService
 
-import "github.com/iAmPlus/microservice/models/apimodels"
+import "github.com/microservice/models/apimodels"
 
 type Database interface {
 	SuspendStudent(teacher_ID string, Pagestate apimodels.SuspendStudents) error

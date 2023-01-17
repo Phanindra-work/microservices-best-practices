@@ -1,8 +1,8 @@
 package studenthandler
 
 import (
-	"github.com/iAmPlus/microservice/restapi/operations/student"
-	"github.com/iAmPlus/microservice/restapi/responder"
+	"github.com/microservice/restapi/operations/student"
+	"github.com/microservice/restapi/responder"
 
 	"github.com/go-openapi/runtime/middleware"
 )

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/iAmPlus/microservice/utils"
+	"github.com/microservice/utils"
 )
 
 func TestFindSubtitleLanguageCodes(t *testing.T) {

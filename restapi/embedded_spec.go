@@ -279,7 +279,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "pagestate": {
       "type": "object",
@@ -327,7 +327,7 @@ func init() {
           "x-order": 3
         }
       },
-      "x-go-package": "github.com/iAmPlus/skill-news-go/common"
+      "x-go-package": "github.com/microservice/models"
     },
     "recipients": {
       "description": "Recipients",
@@ -341,7 +341,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "register": {
       "description": "Register Student",
@@ -360,7 +360,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "retrieve_for_notifications": {
       "description": "Retrieve for Notifications",
@@ -377,7 +377,7 @@ func init() {
           "x-order": 1
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "student": {
       "description": "Student structure",
@@ -399,7 +399,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "suspend_students": {
       "description": "Suspend Students",
@@ -411,7 +411,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "teacher": {
       "description": "Teacherr structure",
@@ -428,7 +428,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/microservice/models"
+      "x-go-package": "github.com/microservice/models"
     }
   }
 }`))
@@ -711,7 +711,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "pagestate": {
       "type": "object",
@@ -759,7 +759,7 @@ func init() {
           "x-order": 3
         }
       },
-      "x-go-package": "github.com/iAmPlus/skill-news-go/common"
+      "x-go-package": "github.com/microservice/models"
     },
     "recipients": {
       "description": "Recipients",
@@ -773,7 +773,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "register": {
       "description": "Register Student",
@@ -792,7 +792,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "retrieve_for_notifications": {
       "description": "Retrieve for Notifications",
@@ -809,7 +809,7 @@ func init() {
           "x-order": 1
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "student": {
       "description": "Student structure",
@@ -831,7 +831,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "suspend_students": {
       "description": "Suspend Students",
@@ -843,7 +843,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/hotels/models"
+      "x-go-package": "github.com/microservice/models"
     },
     "teacher": {
       "description": "Teacherr structure",
@@ -860,7 +860,7 @@ func init() {
           "x-order": 0
         }
       },
-      "x-go-package": "github.com/iAmPlus/microservice/models"
+      "x-go-package": "github.com/microservice/models"
     }
   }
 }`))

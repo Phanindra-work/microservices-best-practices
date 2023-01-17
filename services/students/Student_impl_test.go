@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/iAmPlus/microservice/models/apimodels"
+	"github.com/microservice/models/apimodels"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
